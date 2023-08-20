@@ -67,6 +67,7 @@ export default function Home() {
               return (
                 <div key={dataNote.id} className="md:col-span-3 lg:col-span-4">
                   <div
+                    style={{ backgroundColor: dataNote.color }}
                     className={`p-3 md:p-5 bg-[${dataNote.color}] h-[220px] md:h-[300px] rounded-2xl shadow-lg`}
                   >
                     {dataNote.note.length === 0 || dataNote.note === "" ? (

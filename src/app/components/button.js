@@ -1,12 +1,12 @@
-"use client";
-
 import React from "react";
 
 export default function Button({ color, handleColorChange }) {
   return (
     <button
+      style={{ backgroundColor: color }}
+      className={`h-[10px] w-[10px] p-4 flex justify-center items-center rounded-full`}
       onClick={() => handleColorChange(color)}
-      className={`h-[10px] w-[10px] bg-[${color}] text-black p-4 flex justify-center items-center rounded-full`}
-    ></button>
+    >
+    </button>
   );
 }
