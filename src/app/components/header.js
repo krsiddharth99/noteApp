@@ -10,7 +10,7 @@ export default function Header({ addNote, handleColorChange, colors }) {
         onClick={addNote}
         className="h-[10px] w-[10px] md:h-[20px] md:w-[20px] bg-black text-white p-6 md:p-8 flex justify-center items-center rounded-full"
       >
-        <i class="fa-solid fa-plus"></i>
+        <i className="fa-solid fa-plus"></i>
       </button>
       {colors?.map((color, index) => {
         return (
