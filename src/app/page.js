@@ -3,6 +3,8 @@
 import Header from "./components/header";
 import Logo from "./components/logo";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
@@ -23,10 +25,15 @@ export default function Home() {
   };
 
   const updateNote = (index) => {
-    const cloneList = [...notes];
-    cloneList[index]["note"] = note;
-    setNotes(cloneList);
-    setNote("");
+    if (note.length !== 0 || note !== "") {
+      const cloneList = [...notes];
+      cloneList[index]["note"] = note;
+      setNotes(cloneList);
+      setNote("");
+      toast.success("Successfully Added!")
+    }else{
+      toast.error("Please Write Something!")
+    }
   };
 
   const deleteNote = (index) => {
@@ -34,13 +41,18 @@ export default function Home() {
     cloneNotes.splice(index, 1);
     setNotes(cloneNotes);
     setNote("");
+    toast.warning("You Have delete Something!")
   };
 
   const handleColorChange = (color) => {
-    const lastIndex = notes.length - 1;
-    const cloneList = [...notes];
-    cloneList[lastIndex]["color"] = color;
-    setNotes(cloneList);
+    if (notes.length > 0) {
+      const lastIndex = notes.length - 1;
+      const cloneList = [...notes];
+      cloneList[lastIndex]["color"] = color;
+      setNotes(cloneList);
+    }else{
+      toast.error("No Data Found!")
+    }
   };
 
   const handleChange = (event) => {
@@ -59,8 +71,22 @@ export default function Home() {
       <main className="mr-5 ml-20 md:ml-40 lg:ml-52 mt-6 md:mr-10 lg:mr-20">
         <div className="grid md:grid-cols-6 lg:grid-cols-12 lg:gap-10 gap-5">
           {notes?.length === 0 ? (
-            <div className="grid place-items-center">
-              <p>No Notes yet found !</p>
+            <div className="col-span-6 h-[600px] md:h-[600px] lg:h-[600px] md:col-span-12">
+              <div className="flex h-full items-center justify-center flex-col">
+                <img
+                  src="/images/check.png"
+                  width={50}
+                  height={50}
+                  alt="empty"
+                />
+                <q className="mt-2">
+                  {" "}
+                  No <span className="text-red-500 font-semibold">
+                    Notes
+                  </span>{" "}
+                  yet found!{" "}
+                </q>
+              </div>
             </div>
           ) : (
             notes?.map((dataNote, index) => {
@@ -73,7 +99,7 @@ export default function Home() {
                     {dataNote.note.length === 0 || dataNote.note === "" ? (
                       <textarea
                         value={note}
-                        className="h-[210px] max-h-[210px] w-full overflow-auto mb-4 bg-transparent outline-none"
+                        className="h-[140px] max-h-[140px] md:h-[210px] md:max-h-[210px] w-full overflow-auto mb-4 bg-transparent outline-none"
                         placeholder="Write Something"
                         name="note"
                         onChange={handleChange}
@@ -97,7 +123,7 @@ export default function Home() {
                       {dataNote.note.length === 0 || dataNote.note === "" ? (
                         <button
                           onClick={() => updateNote(index)}
-                          className="bg-black text-white rounded-md px-3 py-2 text-sm font-semibold flex items-center gap-2"
+                          className="bg-black text-white rounded-md px-2 py-1 md:px-3 md:py-2 text-sm font-semibold flex items-center gap-2"
                         >
                           <i className="fa-solid fa-check"></i>
                           <span>Submit</span>
@@ -114,6 +140,7 @@ export default function Home() {
             })
           )}
         </div>
+        <ToastContainer />
       </main>
     </>
   );
