@@ -71,6 +71,7 @@ export default function Home() {
       />
       <Logo />
       <main className="mr-5 ml-20 md:ml-40 lg:ml-52 mt-6 md:mr-10 lg:mr-20">
+      <p className="text-3xl font">Hello bhai</p>
         <div className="grid md:grid-cols-6 lg:grid-cols-12 lg:gap-10 gap-5">
           {notes?.length === 0 ? (
             <div className="col-span-6 h-[600px] md:h-[600px] lg:h-[600px] md:col-span-12">
