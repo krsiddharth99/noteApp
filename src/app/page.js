@@ -22,6 +22,8 @@ export default function Home() {
         id: Math.floor(Math.random() * 100),
       },
     ]);
+    notes.reverse();
+    console.log(notes);
   };
 
   const updateNote = (index) => {
@@ -47,7 +49,7 @@ export default function Home() {
   const handleColorChange = (color) => {
     if (notes.length > 0) {
       const lastIndex = notes.length - 1;
-      const cloneList = [...notes];
+      const cloneList = [...notes]; // 1 level clone
       cloneList[lastIndex]["color"] = color;
       setNotes(cloneList);
     }else{
